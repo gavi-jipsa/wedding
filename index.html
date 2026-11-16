@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>김재현 ♥ 이지현 결혼합니다</title>
+  <meta name="description" content="2027년 2월 27일 토요일 오후 1시 30분, 더컨벤션 송파문정 그랜드볼룸" />
+  <meta name="theme-color" content="#fbf9f3" />
+  <meta property="og:title" content="김재현 ♥ 이지현 결혼합니다" />
+  <meta property="og:description" content="2027년 2월 27일 토요일 오후 1시 30분 · 더컨벤션 송파문정" />
+  <meta property="og:image" content="assets/img/share-800x1200.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Gowun+Batang&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="page">
+
+  <!-- 1. 첫 장 — 접힌 편지가 양옆으로 펼쳐짐 ================ -->
+  <section class="hero" id="hero">
+    <div class="cover" id="cover" aria-label="초대장 열기">
+      <div class="cv-panel cv-l">
+        <div class="cv-in">
+          <p class="cv-small">Invitation</p>
+          <i class="sprig cv-sprig"></i>
+          <p class="cv-names">김재현 · 이지현</p>
+        </div>
+      </div>
+      <div class="cv-panel cv-r"></div>
+    </div>
+
+    <p class="hero-label h-in" style="--i:0">Invitation</p>
+    <div class="hero-photo h-in" style="--i:1"><img id="heroPhoto" alt="신랑 신부" /></div>
+
+    <div class="hero-info">
+      <div class="hi-left h-in" style="--i:2">
+        <i class="hi-rule"></i>
+        <p class="hi-kicker" id="heroKicker"></p>
+        <p class="hero-en" id="heroLine"></p>
+        <p class="hero-when">2027년 2월 27일 토요일<br />오후 1시 30분<br />더컨벤션 송파문정 <span id="heroHall"></span></p>
+      </div>
+      <h1 class="hero-names h-in" style="--i:3"><span id="nGroom">김재현</span><span id="nBride">이지현</span></h1>
+    </div>
+  </section>
+
+  <!-- 2. 모시는 글 ======================================== -->
+  <section class="sec light tone2" id="greeting">
+    <h2 class="title rv">모시는 글</h2>
+    <div class="orn rv"><i></i></div>
+    <p class="greet-body rv" id="greetBody"></p>
+    <div class="parents rv" id="parents"></div>
+  </section>
+
+  <!-- 3. 예식 일시 ======================================== -->
+  <section class="sec dark" id="date">
+    <h2 class="title rv">예식 안내</h2>
+    <div class="orn rv"><i></i></div>
+    <p class="date-sub rv">2027년 2월 27일 토요일 오후 1시 30분</p>
+    <p class="date-place rv" id="datePlace"></p>
+    <div class="calendar rv" id="calendar"></div>
+    <div class="dday rv">
+      <p class="dday-text" id="ddayText"></p>
+      <div class="dday-clock" id="ddayClock">
+        <div><b id="cdD">0</b><span>일</span></div>
+        <div><b id="cdH">00</b><span>시간</span></div>
+        <div><b id="cdM">00</b><span>분</span></div>
+        <div><b id="cdS">00</b><span>초</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 오시는 길 ======================================== -->
+  <section class="sec light tone2" id="location">
+    <h2 class="title rv">오시는 길</h2>
+    <div class="orn rv"><i></i></div>
+    <p class="venue-name rv" id="venueName"></p>
+    <p class="venue-addr rv" id="venueAddr"></p>
+    <div class="map-card rv"><img id="mapImg" alt="약도" /></div>
+    <div class="btn-row rv">
+      <a class="btn" id="kakaoMapBtn" target="_blank" rel="noopener">카카오맵</a>
+      <a class="btn" id="naverMapBtn" target="_blank" rel="noopener">네이버지도</a>
+    </div>
+    <dl class="transport rv" id="transport"></dl>
+
+    <div class="weather rv" id="weather">
+      <div class="weather-head">
+        <b>예식일 날씨</b>
+        <small id="weatherMode">불러오는 중…</small>
+      </div>
+      <div class="weather-body">
+        <div class="weather-icon" id="weatherIcon"></div>
+        <div class="weather-main">
+          <div class="weather-temp" id="weatherTemp">—</div>
+          <div class="weather-desc" id="weatherDesc"></div>
+        </div>
+      </div>
+      <p class="weather-tip" id="weatherTip"></p>
+    </div>
+  </section>
+
+  <!-- 5. 앨범 (가로 스와이프) ============================== -->
+  <section class="sec gallery" id="gallery">
+    <h2 class="title rv">앨범</h2>
+    <div class="orn rv"><i></i></div>
+    <div class="gal-track rv" id="galTrack"></div>
+    <div class="gal-meta rv">
+      <span class="gal-count" id="galCount">01 / 12</span>
+      <span class="gal-bar"><i id="galBar"></i></span>
+    </div>
+  </section>
+
+  <!-- 6. 마음 전하실 곳 =================================== -->
+  <section class="sec tone2" id="accounts">
+    <h2 class="title rv">마음 전하실 곳</h2>
+    <div class="orn rv"><i></i></div>
+    <p class="sub rv">참석이 어려우신 분들을 위해 기재했습니다.<br />너그러운 마음으로 양해 부탁드립니다.</p>
+    <div class="acc rv" data-side="groom"></div>
+    <div class="acc rv" data-side="bride"></div>
+  </section>
+
+  <!-- 7. 하객 사진 공유 (링크는 config.js의 googlePhotosUrl) -->
+  <section class="sec" id="photoshare">
+    <h2 class="title rv">공유 앨범</h2>
+    <div class="orn rv"><i></i></div>
+    <p class="sub rv">여러분의 시선으로 담은 오늘의 순간을<br />공유 앨범에 올려주시면 오래 간직하겠습니다.</p>
+    <a class="btn btn-fill rv" id="googlePhotosBtn" target="_blank" rel="noopener">공유 앨범에 사진 올리기</a>
+  </section>
+
+  <!-- 8. 맺음 ============================================= -->
+  <footer class="sec light tone2 footer">
+    <div class="thanks-photo rv"><img id="thanksPhoto" alt="" /></div>
+    <p class="thanks rv">감사합니다</p>
+    <p class="sub rv">귀한 걸음으로 함께해 주시는 마음,<br />오래도록 잊지 않겠습니다.</p>
+    <p class="sign rv">김재현 · 이지현 드림</p>
+    <div class="btn-row rv">
+      <button class="btn btn-fill" id="kakaoShareBtn" hidden>카카오톡으로 전하기</button>
+      <button class="btn" id="copyLinkBtn">청첩장 주소 복사</button>
+    </div>
+    <p class="copy">2027. 2. 27</p>
+  </footer>
+</main>
+
+<!-- 사진 크게 보기 (핀치 줌) -->
+<div class="viewer" id="viewer" aria-hidden="true">
+  <button class="x-btn" id="vwClose" aria-label="닫기">✕</button>
+  <div class="vw-track" id="vwTrack"></div>
+  <div class="vw-count" id="vwCount"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js" crossorigin="anonymous"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
