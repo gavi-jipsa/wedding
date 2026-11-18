@@ -39,7 +39,8 @@ a { color: inherit; text-decoration: none; }
 .page { max-width: 480px; margin: 0 auto; background: var(--bg); overflow: hidden; position: relative; }
 
 /* ---------- 공통 ---------- */
-.sec { padding: 100px 28px; text-align: center; position: relative; background: var(--bg); }
+/* 섹션 위아래 여백: 작은 폰 72px ~ 큰 화면 100px */
+.sec { padding: clamp(72px, 20vw, 100px) clamp(22px, 7vw, 28px); text-align: center; position: relative; background: var(--bg); }
 .sec + .sec { border-top: 1px solid var(--line); }
 .sec.tone2 { background: var(--bg-2); }
 
@@ -67,12 +68,18 @@ a { color: inherit; text-decoration: none; }
 .orn.rv { transform: scaleY(0); } .orn.rv.in { transform: scaleY(1); }
 
 /* ---------- 1. 첫 장 ---------- */
-.hero { position: relative; min-height: 100svh; padding: 0 30px 46px; overflow: hidden; background: var(--bg); }
+/* 첫 장은 휴대폰 한 화면에 딱 맞게: 사진이 남는 높이를 채우고, 이름·일시는 항상 화면 안에 */
+.hero {
+  position: relative; overflow: hidden; background: var(--bg);
+  display: flex; flex-direction: column; padding: 0 30px;
+  height: 100vh; height: 100svh;          /* svh: 주소창을 뺀 실제 보이는 높이 */
+  min-height: 540px; max-height: 1000px;
+}
 
 /* 손그림 표지 — 누르거나 잠시 뒤 위로 스르륵 사라짐 */
 .cover {
   position: absolute; inset: 0; z-index: 5; cursor: pointer;
-  height: 100svh; display: grid; place-items: center; padding-bottom: 30px;
+  display: grid; place-items: center; padding-bottom: 4%;
   background: #f1ecdf;
   transition: opacity .8s ease, transform .8s ease, visibility 0s linear .8s;
 }
@@ -80,10 +87,10 @@ a { color: inherit; text-decoration: none; }
 .cover::after { content: ""; position: absolute; inset: 21px; border: 1px solid rgba(47,42,34,.1); pointer-events: none; }
 .hero.open .cover { opacity: 0; transform: translateY(-28px); visibility: hidden; pointer-events: none; }
 /* 흰 배경이 크림색 종이에 스며들도록 multiply */
-.cv-art { width: min(300px, 78vw); height: auto; mix-blend-mode: multiply; user-select: none; -webkit-user-drag: none; }
+.cv-art { width: min(300px, 78vw, 48svh); height: auto; mix-blend-mode: multiply; user-select: none; -webkit-user-drag: none; }
 
 /* 꽉 찬 사진 — 화면 대부분을 채우고, 아래로 이름이 살짝 보여 스크롤을 부름 */
-.hero-photo { position: relative; margin: 0 -30px; height: max(520px, calc(100svh - 120px)); overflow: hidden; background: linear-gradient(160deg, #e3ded2, #cfc8b9); }
+.hero-photo { position: relative; margin: 0 -30px; flex: 1 1 auto; min-height: 0; overflow: hidden; background: linear-gradient(160deg, #e3ded2, #cfc8b9); }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); transition: transform 3.2s cubic-bezier(.2,.6,.2,1) .4s; }
 .hero.open .hero-photo img { transform: none; }
 .hero-photo.empty img { display: none; }
@@ -94,7 +101,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(180deg, transparent 0%, transparent 46%, rgba(20,18,14,.14) 66%, rgba(20,18,14,.5) 100%);
 }
 /* 사진 위 봄 문구 */
-.band { position: absolute; z-index: 2; left: 0; right: 0; bottom: 44px; font-family: var(--serif); text-align: center; color: #fbf9f3; text-shadow: 0 1px 12px rgba(0,0,0,.28); }
+.band { position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(22px, 5svh, 44px); font-family: var(--serif); text-align: center; color: #fbf9f3; text-shadow: 0 1px 12px rgba(0,0,0,.28); }
 .band-1 { font-size: 13.5px; letter-spacing: .16em; margin-right: -.16em; opacity: .82; line-height: 1.9; }
 .band-2 { font-size: 17px; letter-spacing: .14em; margin-right: -.14em; line-height: 1.9; }
 /* 등장 순서: 사진이 천천히 제자리로 → 문구가 한 줄씩 떠오름 */
@@ -104,10 +111,10 @@ a { color: inherit; text-decoration: none; }
 .hero.open .band-2 { transition-delay: 1.7s; }
 
 /* 사진 아래: 이름 + 일시·장소 */
-.hero-bottom { margin-top: 48px; padding-bottom: 14px; text-align: center; }
+.hero-bottom { flex: none; padding: clamp(24px, 4.5svh, 40px) 0 clamp(26px, 5svh, 44px); text-align: center; }
 .hero-names { display: flex; justify-content: center; align-items: center; gap: 20px; font-weight: 400; line-height: 1; }
 .hero-names b { font-family: var(--serif); font-weight: 400; font-size: 25px; letter-spacing: .24em; margin-right: -.24em; color: var(--ink); }
-.hero-when { margin-top: 30px; font-family: var(--serif); font-size: 14.5px; line-height: 1.9; color: #4b4740; letter-spacing: .03em; }
+.hero-when { margin-top: clamp(16px, 3svh, 28px); font-family: var(--serif); font-size: 14.5px; line-height: 1.9; color: #4b4740; letter-spacing: .03em; }
 
 /* 이름 사이 기호 (config.js 의 nameMark) */
 .mark { display: inline-flex; flex: none; align-items: center; justify-content: center; }
@@ -251,6 +258,51 @@ a { color: inherit; text-decoration: none; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 @media (max-width: 360px) {
-  .sec { padding-left: 22px; padding-right: 22px; }
+  .hero { padding: 0 22px; }
+  .hero-photo { margin: 0 -22px; }
+  .hero-names { gap: 14px; }
   .hero-names b { font-size: 22px; }
+  .hero-when { font-size: 13.5px; }
+  .greet-body { font-size: 15px; }
+  .parents { column-gap: 5px; font-size: 14.5px; }
+  .parents .child { font-size: 16px; }
 }
+
+/* =========================================================
+   세이지 그린 포인트 — 눈에 걸리는 작은 자리마다 한 방울씩
+   ========================================================= */
+:root { --accent-soft: rgba(107, 122, 92, .09); --accent-line: rgba(107, 122, 92, .35); }
+
+/* 모시는 글: 부모님 성함 사이 점, '의 차남/장녀' */
+.parents .dot, .parents .rel { color: var(--accent); }
+
+/* 예식 안내: 장소 줄, 달력 '토' 머리글(예식 요일), 남은 시간 칸 */
+.date-place { color: var(--accent); }
+.cal-head span:last-child { color: var(--accent); font-weight: 600; }
+.dday-clock div { background: var(--accent-soft); }
+.dday-clock span { color: var(--accent); }
+
+/* 오시는 길: 전화번호 밑줄, 지도 버튼 글씨, 날씨 카드 */
+.venue-addr a { color: var(--accent); border-bottom-color: var(--accent-line); }
+#location .btn-row .btn { color: var(--accent); border-color: var(--accent-line); }
+.weather { background: var(--accent-soft); }
+.weather-head b { color: var(--accent); }
+
+/* 앨범: 지금 보고 있는 번호 */
+.gal-count { color: var(--accent); }
+
+/* 마음 전하실 곳: 펼침 화살표, 신랑·아버지 같은 호칭, 전화·문자 버튼, 복사 버튼 */
+.acc-toggle .chev { border-color: var(--accent); }
+.person-name small { color: var(--accent); }
+.icon-btn { color: var(--accent); border-color: var(--accent-line); }
+.copy-btn { background: var(--accent); }
+
+/* 공유 앨범 버튼, 알림, 맺음 날짜 */
+#photoshare .btn-fill { background: var(--accent); border-color: var(--accent); }
+.toast { background: var(--accent); }
+.copy { color: var(--accent); }
+
+/* 지도 버튼: 버튼은 크림 톤 그대로, 앞에 앱 아이콘 모양 배지 */
+.map-btn { gap: 8px; font-weight: 500; }
+.map-btn .app-ico { width: 22px; height: 22px; flex: none; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+#location #kakaoMapBtn, #location #naverMapBtn { color: var(--ink); border-color: var(--line); background: rgba(255,255,255,.6); }

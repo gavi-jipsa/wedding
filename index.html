@@ -72,8 +72,11 @@
     <p class="venue-addr rv" id="venueAddr"></p>
     <div class="map-card rv"><img id="mapImg" alt="약도" /></div>
     <div class="btn-row rv">
-      <a class="btn" id="kakaoMapBtn" target="_blank" rel="noopener">카카오맵</a>
-      <a class="btn" id="naverMapBtn" target="_blank" rel="noopener">네이버지도</a>
+      <!-- 앱 아이콘 모양 배지 (공식 아이콘 이미지가 있으면 assets/img/ 에 넣고 svg 대신 img 로 바꿔도 됨) -->
+      <a class="btn map-btn" id="kakaoMapBtn" target="_blank" rel="noopener">
+        <svg class="app-ico" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#fee500"/><path d="M20 9.5a8 8 0 0 0-8 8c0 5.8 8 13.5 8 13.5s8-7.7 8-13.5a8 8 0 0 0-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="#191919"/></svg>카카오맵</a>
+      <a class="btn map-btn" id="naverMapBtn" target="_blank" rel="noopener">
+        <svg class="app-ico" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#03c75a"/><path d="M13 11h5.2l4 6.4V11H27v18h-5.2l-4-6.4V29H13Z" fill="#fff"/></svg>네이버지도</a>
     </div>
     <dl class="transport rv" id="transport"></dl>
 
