@@ -8,9 +8,13 @@ window.WEDDING = {
   // 결혼식 일시 (한국 시간)
   date: "2027-02-27T13:30:00+09:00",
 
-  // 히어로(초대장) 큰 사진 — 세로형 권장 (3:4)
+  // 처음 손그림 표지가 보이는 시간(초) — 누르면 바로 넘어감
+  coverSeconds: 3.2,
+  // 첫 장 큰 사진 — 세로형 권장 (3:4)
   heroPhoto: "assets/img/main.jpg",
-  // 첫 장 사진 아래 두 줄 문구
+  // 첫 장 이름 사이 기호: "sketch" 손그림 하트 / "heart" 하트 / "ring" 반지 / "flower" 꽃 / "amp" & / "infinity" 무한
+  nameMark: "sketch",
+  // 첫 장 사진 위 두 줄 문구
   heroKicker: "다섯 번의 봄을 지나",          // 2021년 11월 1일부터 함께한 봄: 22·23·24·25·26년
   heroLine: "여섯 번째 봄의 시작에서",
 
@@ -21,8 +25,8 @@ window.WEDDING = {
     "귀한 걸음 하시어\n따뜻한 마음으로 축복해 주시면\n더없는 기쁨으로 간직하겠습니다.",
 
   parents: {
-    groom: { father: "김영태", mother: "장서우", relation: "아들" },
-    bride: { father: "이상화", mother: "오은경", relation: "딸" }
+    groom: { father: "김영태", mother: "장서우", relation: "차남" },
+    bride: { father: "이상화", mother: "오은경", relation: "장녀" }
   },
 
   venue: {
@@ -38,7 +42,12 @@ window.WEDDING = {
     naverMap: "https://map.naver.com/p/search/더컨벤션 송파문정",
     transport: [
       { label: "지하철", text: "8호선 문정역 3번 출구 · 도보 5분" },
-      { label: "버스", text: "간선 302 · 303 · 320 · 333 · 343 · 345 · 350 · 360\n지선 3322 · 3420\n일반 30 · 31 · 100 · 331" },
+      { label: "버스", text: "‘문정법조타운·건영아파트’ 정류장 하차",
+        lines: [
+          ["간선", "302, 303, 333, 345, 360"],
+          ["지선", "3322, 3420"]
+        ],
+        note: "그 외 노선은 지도 앱에서 확인해 주세요" },
       { label: "자가용", text: "내비게이션 ‘송파대로 155’ 또는 ‘더컨벤션 송파문정’\n건물 내 주차장 이용" }
     ]
   },

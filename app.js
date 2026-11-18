@@ -46,22 +46,24 @@ function setImg(img, src, label) {
   img.src = src;
 }
 
-/* 잎으로 엮은 리스 — 아래에서 만나 위가 열린 모양 (좌우 대칭) */
-function wreathSVG() {
-  const R = 38, cx = 60, cy = 56, leaf = "M0 0 C4 -5 12 -5 16 0 C12 5 4 5 0 0Z";
-  const pt = (deg) => [cx + R * Math.cos((deg * Math.PI) / 180), cy + R * Math.sin((deg * Math.PI) / 180)];
-  const [x1, y1] = pt(98), [x2, y2] = pt(238);
-  let side = `<path d="M${x1.toFixed(1)} ${y1.toFixed(1)} A ${R} ${R} 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)}"/>`;
-  for (let k = 0; k < 8; k++) {
-    const a = 106 + k * 18, [x, y] = pt(a);
-    const rot = a + 90 + (k % 2 ? 38 : -38), s = (1 - k * 0.055).toFixed(2);
-    side += `<path d="${leaf}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot}) scale(${s})"/>`;
-  }
-  return `<svg viewBox="0 0 120 104" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-    <g>${side}</g><g transform="translate(120 0) scale(-1 1)">${side}</g></svg>`;
-}
+/* ---------- 1. hero ---------- */
+/* 이름 사이 기호 — 얇은 선 하나로 그린 하트 / 겹친 두 반지 */
+const MARKS = {
+  heart: `<svg viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M12 20 C 5 15, 1.5 11, 1.5 7 A 5 5 0 0 1 12 5 A 5 5 0 0 1 22.5 7 C 22.5 11, 19 15, 12 20 Z"/></svg>`,
+  ring: `<svg viewBox="0 0 34 22" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="7.5"/><circle cx="22" cy="12" r="7.5"/><path d="M10 3.4 L12 1.2 L14 3.4" stroke-linejoin="round"/></svg>`,
+  // 표지 일러스트처럼 연필로 두 번 그은 듯한 손그림 하트
+  sketch: `<svg viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20.5 C 5.5 15.8, 1.8 11.6, 2 7.4 C 2.2 4, 5 2, 7.6 2.3 C 9.8 2.6, 11.3 4.2, 12.1 6 C 12.9 4, 14.6 2.4, 16.9 2.3 C 19.8 2.2, 22.3 4.6, 22 7.8 C 21.7 11.9, 18 15.9, 12 20.5"/>
+    <path d="M11.6 19.6 C 6 15.6, 2.7 11.8, 2.9 7.9 C 3.1 4.9, 5.4 3.1, 7.9 3.2 C 10 3.4, 11.3 5, 12 6.7 C 12.7 4.8, 14.3 3.2, 16.6 3.1 C 19.3 3, 21.3 5.1, 21.1 8.1 C 20.8 11.6, 17.8 15.3, 12.5 19.4" opacity=".55"/></svg>`,
+  // 다섯 장 꽃잎 — 봄
+  flower: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">${[0, 72, 144, 216, 288]
+    .map((r) => `<ellipse cx="12" cy="6.6" rx="3" ry="4.4" transform="rotate(${r} 12 12)"/>`).join("")}<circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg>`,
+  // 클래식 앰퍼샌드
+  amp: `<span class="amp">&amp;</span>`,
+  // 이어진 두 고리 — 무한
+  infinity: `<svg viewBox="0 0 30 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M15 8 C 12 3.5, 4.5 3.5, 4.5 8 C 4.5 12.5, 12 12.5, 15 8 C 18 3.5, 25.5 3.5, 25.5 8 C 25.5 12.5, 18 12.5, 15 8 Z"/></svg>`
+};
 
-/* ---------- 1. hero : 봉투 열기 ---------- */
 function initHero() {
   const hero = $("#hero");
   $("#nGroom").textContent = C.groom.name;
@@ -75,11 +77,18 @@ function initHero() {
   photo.onerror = () => photo.parentElement.classList.add("empty");
   photo.src = C.heroPhoto;
 
-  // 표지: 같은 내용을 좌우 패널에 반씩 보이게 해서 한 장처럼 보이다가, 가운데에서 양쪽으로 펼쳐짐
-  $(".cv-r").appendChild($(".cv-l .cv-in").cloneNode(true));
+  // 주소 뒤 옵션 (시안 비교용): ?mark=기호  ?nocover  ?cover
+  const params = new URLSearchParams(location.search);
+
+  // 이름 사이 기호
+  const mark = (params.get("mark") || C.nameMark || "sketch").toLowerCase();
+  $$(".mark").forEach((el) => { el.innerHTML = MARKS[mark] || MARKS.sketch; el.classList.add("mark-" + (MARKS[mark] ? mark : "sketch")); });
+
+  // 손그림 표지: 누르거나 잠시 뒤 위로 스르륵 사라짐
   const open = () => hero.classList.add("open");
   $("#cover").addEventListener("click", open);
-  setTimeout(open, 1800);   // 누르지 않아도 잠시 뒤 스르륵 사라짐
+  if (params.has("nocover")) open();                          // 표지 없이 바로
+  else if (!params.has("cover")) setTimeout(open, C.coverSeconds * 1000 || 3200);   // ?cover 면 표지 유지
 }
 
 /* ---------- 2. greeting ---------- */
@@ -326,11 +335,15 @@ const MAP_SVG = `
   <text x="201" y="186" font-size="8.5" fill="#6e2a25" writing-mode="tb" letter-spacing="1">도보 5분</text>
   <!-- 주변 -->
   <g font-size="10" fill="#6b5f4f" text-anchor="middle">
-    <text x="103" y="80">문정 법조타운</text>
-    <text x="103" y="94" font-size="8.5">서울동부지방법원 · 검찰청</text>
+    <text x="103" y="80">문정 업무지구</text>
+    <text x="103" y="94" font-size="8.5">SK V1 · 엠스테이트</text>
     <text x="332" y="68">문정동</text>
     <text x="332" y="82">로데오거리</text>
-    <text x="60" y="206" font-size="9">업무지구</text>
+    <!-- 법조타운: 예식장 바로 서쪽 -->
+    <text x="60" y="190" font-size="9.5">문정</text>
+    <text x="60" y="203" font-size="9.5">법조타운</text>
+    <text x="60" y="219" font-size="7.8">동부지방법원</text>
+    <text x="60" y="230" font-size="7.8">동부지방검찰청</text>
   </g>
   <g font-size="9.5" fill="#9a7b46" font-style="italic" font-family="Georgia,serif">
     <text x="232" y="24" text-anchor="middle" font-style="normal" font-size="9" font-family="inherit" fill="#6b5f4f">↑ 가락시장 · 잠실</text>
@@ -351,7 +364,10 @@ function initLocation() {
   const map = $("#mapImg");
   map.onerror = () => { map.outerHTML = MAP_SVG; };
   map.src = C.mapImage;
-  $("#transport").innerHTML = v.transport.map((t) => `<div><dt>${esc(t.label)}</dt><dd>${esc(t.text)}</dd></div>`).join("");
+  // 버스처럼 노선이 여러 줄이면 '간선 | 번호들' 표로 정렬
+  const busRows = (lines) => lines ? `<span class="bus">${lines.map(([k, nums]) => `<b>${esc(k)}</b><span>${esc(nums)}</span>`).join("")}</span>` : "";
+  $("#transport").innerHTML = v.transport
+    .map((t) => `<div><dt>${esc(t.label)}</dt><dd>${esc(t.text)}${busRows(t.lines)}${t.note ? `<small class="t-note">${esc(t.note)}</small>` : ""}</dd></div>`).join("");
   initWeather();
 }
 

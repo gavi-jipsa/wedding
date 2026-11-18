@@ -12,39 +12,29 @@
   <meta property="og:type" content="website" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Gowun+Batang&family=IM+Fell+English:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/maru-buri.css" />  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <main class="page">
 
-  <!-- 1. 첫 장 — 접힌 편지가 양옆으로 펼쳐짐 ================ -->
+  <!-- 1. 첫 장 — 손그림 표지가 스르륵 사라지고 사진이 나타남 ===== -->
   <section class="hero" id="hero">
     <div class="cover" id="cover" aria-label="초대장 열기">
-      <div class="cv-panel cv-l">
-        <div class="cv-in">
-          <p class="cv-small">Invitation</p>
-          <i class="sprig cv-sprig"></i>
-          <p class="cv-names">김재현 · 이지현</p>
-        </div>
-      </div>
-      <div class="cv-panel cv-r"></div>
+      <img class="cv-art" src="assets/img/cover.png" alt="Our Wedding Day 27.02.27" />
     </div>
 
-    <p class="hero-label h-in" style="--i:0">Invitation</p>
-    <div class="hero-photo h-in" style="--i:1"><img id="heroPhoto" alt="신랑 신부" /></div>
-
-    <div class="hero-info">
-      <div class="hi-left h-in" style="--i:2">
-        <i class="hi-rule"></i>
-        <p class="hi-kicker" id="heroKicker"></p>
-        <p class="hero-en" id="heroLine"></p>
-        <p class="hero-when">2027년 2월 27일 토요일<br />오후 1시 30분<br />더컨벤션 송파문정 <span id="heroHall"></span></p>
+    <!-- 꽉 찬 사진 + 사진 아래쪽 흰 글씨 봄 문구 -->
+    <div class="hero-photo h-in" style="--i:0">
+      <img id="heroPhoto" alt="신랑 신부" />
+      <div class="band">
+        <p class="band-1" id="heroKicker"></p>
+        <p class="band-2" id="heroLine"></p>
       </div>
-      <h1 class="hero-names h-in" style="--i:3"><span id="nGroom">김재현</span><span id="nBride">이지현</span></h1>
+    </div>
+
+    <div class="hero-bottom">
+      <h1 class="hero-names h-in" style="--i:1"><b id="nGroom">김재현</b><i class="mark"></i><b id="nBride">이지현</b></h1>
+      <p class="hero-when h-in" style="--i:2">2027년 2월 27일 토요일 오후 1시 30분<br />더컨벤션 송파문정 <span id="heroHall"></span></p>
     </div>
   </section>
 
