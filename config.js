@@ -9,7 +9,7 @@ window.WEDDING = {
   date: "2027-02-27T13:30:00+09:00",
 
   // 처음 손그림 표지가 보이는 시간(초) — 누르면 바로 넘어감
-  coverSeconds: 3.2,
+  coverSeconds: 2,
   // 첫 장 큰 사진 — 세로형 권장 (3:4)
   heroPhoto: "assets/img/main.jpg",
   // 첫 장 이름 사이 기호: "sketch" 손그림 하트 / "heart" 하트 / "ring" 반지 / "flower" 꽃 / "amp" & / "infinity" 무한
